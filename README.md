@@ -1,54 +1,33 @@
-# Anaconda
+# Conda Cloudmesh Package creation
+
+## Prerequisits
+
+Using docker container to create cloudmesh
+put DOckerile in repo
+
+## Creating the Conda package
+
+This will explain how the conta packges are created in the container.
+
+The container could for example be started as interactive container. on OSX 
+
+    cms terminal   
+    
+Needs proper image
+
+## Uploading the Conda packages
+
+Once the packages are created they shuld be uploaded
+
+## Management Makefile
+
+A management makefile will be created with the following targets
+
+`make image` - creates the docker image
+`make image-upload` - uploads the image to dockerhub
+`make conda` -creates all conda packages using the container
+`make conda-upload` uploads all conda packages to the conda hub
 
 
-brew install readline xz
-xcode-select --install
-brew install openssl
-brew install pyenv
-pyenv init
-pyenv local 3.6.6
-
-
-
-
-To install anaconda we also use pyenv
-
-```bash
-$ pyenv install anaconda3-5.3.0
-```
-
-ANaconda breaks the pyenv model or vice versa. Please note we do not like anaconda as we can not use a virtualenv, but must use conda 
-
-```bash
-$ pyenv activate anaconda3-5.3.0
-$ conda update -n base -c defaults conda
-```
-
-
-Does only install python 3.6.7
-
-
-conda create -n python37 python=3.7.1 --no-default-packages
-
-
-
-The following does not wor
-
-After instalation, create a virtual environment for anacoda
-
-
-
-```bash
-pyenv virtualenv anaconda3-5.3.0 ana
-```
-
-Create an alsia in .bash_profile
-
-
-Activate it with 
-
-ANA
-
-Update the base version with 
 
 
