@@ -51,8 +51,8 @@ RUN conda config --set anaconda_upload no
 
 RUN cd cloudmesh-conda/cloudmesh-common && conda build .
 RUN cd cloudmesh-conda/cloudmesh-cmd5 && conda build .
-#RUN cd cloudmesh-conda/cloudmesh-sys && conda build .
-# RUN cd cloudmesh-conda/cloudmesh-inventory && conda build .
+RUN cd cloudmesh-conda/cloudmesh-sys && conda build .
+RUN cd cloudmesh-conda/cloudmesh-inventory && conda build .
 
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
