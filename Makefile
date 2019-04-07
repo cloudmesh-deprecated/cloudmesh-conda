@@ -48,9 +48,28 @@ test:
 	# $(DOCKER) cms
 	#$(DOCKER) pip install python-hostlist
 	#$(DOCKER) pip install oyaml
+	@echo "#################################################"
+	@echo "# COMMON"
+	@echo "#################################################"
+
 	$(DOCKER) conda build cloudmesh-common
+
+	@echo "#################################################"
+	@echo "# CMD5"
+	@echo "#################################################"
+
 	$(DOCKER) conda build cloudmesh-cmd5
+
+	@echo "#################################################"
+	@echo "# SYS"
+	@echo "#################################################"
+
 	$(DOCKER) conda build cloudmesh-sys
+
+	@echo "#################################################"
+	@echo "# INVENTORY"
+	@echo "#################################################"
+
 	$(DOCKER) conda build cloudmesh-inventory
 
 shell:

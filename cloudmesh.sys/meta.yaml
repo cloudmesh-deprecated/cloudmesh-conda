@@ -1,5 +1,5 @@
 package:
-  name: cloudmesh.sys
+  name: cloudmesh-sys
   version: 1.0
 
 source:
