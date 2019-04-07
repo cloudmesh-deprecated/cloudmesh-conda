@@ -98,3 +98,5 @@ upload-sample-broken:
 
 clean:
 	docker image rm cloudmesh/anaconda --force
+	docker system prune -f
+	
