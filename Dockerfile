@@ -39,20 +39,31 @@ RUN pip install pip  -U
 
 RUN conda update --all
 RUN conda config --set always_yes yes
+RUN conda config --set anaconda_upload yes
 
 RUN sh -c 'curl -Ls http://cloudmesh.github.io/get | sh'
 
-# RUN cd cloudmesh-common; pip install .; cd ..
-# RUN cd cloudmesh-cmd5; pip install .; cd ..
-# RUN cd cloudmesh-sys; pip install .; cd ..
-# RUN cd cloudmesh-inventory; pip install .; cd ..
-# RUN cd cloudmesh-cloud; pip install .; cd ..
-# RUN cd cloudmesh-; pip install .; cd ..
 
 RUN python --version
 RUN pip --version
 RUN conda --version
 RUN conda config --add channels conda-forge
+
+WORKDIR cloudmesh-conda/cloudmesh-common
+RUN conda build .
+
+WORKDIR cloudmesh-conda/cloudmesh-cmd5
+RUN conda build .
+
+WORKDIR cloudmesh-conda/cloudmesh-sys
+RUN conda build .
+
+WORKDIR cloudmesh-conda/cloudmesh-inventory
+RUN conda build .
+
+
+# RUN cd cloudmesh-cloud; pip install .; cd ..
+
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]

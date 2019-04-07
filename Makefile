@@ -2,6 +2,15 @@ PACKAGE=conda
 VERSION=5.2.0
 DOCKER=docker run -v $(CURDIR):$(CURDIR) -w $(CURDIR) cloudmesh/anaconda
 
+
+define banner
+	@echo
+	@echo "############################################################"
+	@echo "# $(1) "
+	@echo "############################################################"
+endef
+
+
 conda-build:
 	conda-build $(PACKAGE)
 
@@ -46,34 +55,27 @@ test:
 	docker run cloudmesh/anaconda conda --version
 	$(DOCKER) ls
 	# $(DOCKER) cms
-	#$(DOCKER) pip install python-hostlist
+	#$(DOCKERrun ) pip install python-hostlist
 	#$(DOCKER) pip install oyaml
-	@echo "#################################################"
-	@echo "# COMMON"
-	@echo "#################################################"
 
+	$(call banner, "COMMON")
 	$(DOCKER) conda build cloudmesh-common
 
-	@echo "#################################################"
-	@echo "# CMD5"
-	@echo "#################################################"
-
+	$(call banner, "CMD5")
 	$(DOCKER) conda build cloudmesh-cmd5
 
-	@echo "#################################################"
-	@echo "# SYS"
-	@echo "#################################################"
-
+	$(call banner, "SYS")
 	$(DOCKER) conda build cloudmesh-sys
 
-	@echo "#################################################"
-	@echo "# INVENTORY"
-	@echo "#################################################"
-
+	$(call banner, "INVENTORY")
 	$(DOCKER) conda build cloudmesh-inventory
 
 shell:
-	docker run -it cloudmesh/anaconda
+	docker run --name=conda -it cloudmesh/anaconda
+
+login:
+	docker run --name=conda cloudmesh/anaconda anaconda login
+
 
 
 clean:
