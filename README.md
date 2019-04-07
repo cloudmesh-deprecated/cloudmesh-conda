@@ -1,96 +1,62 @@
 # Conda Cloudmesh Package creation
 
-## Prerequisits
+We explain how we create conda packages for cloudmesh. This has not yet been
+extensively tested, but we encourage you to try it
 
-Using docker container to create cloudmesh
-put DOckerile in repo
+## Installing of the packages
+
+You will need to execute the following commands
+
+```bash
+$ conda install -c cloudmesh cloudmesh-common
+$ conda install -c cloudmesh cloudmesh-cmd5
+$ conda install -c cloudmesh cloudmesh-sys
+$ conda install -c cloudmesh cloudmesh-inventory
+```
+
+After this you still need to set up the `cloudmesh.yaml`, `cloudmesh4.yaml`, and
+inventory.yaml in your ~/.cloudmesh directory. Prerequisits
+
+For more indformation see our documentation
+
 
 ## Creating the Conda package
 
-This will explain how the conta packges are created in the container.
+The next set of information is only for the maintainers of the package and
 
-The container could for example be started as interactive container. on OSX 
+The directory contains a maikefile that creates the container
 
-    cms terminal   
-    
-Needs proper image
+You can say 
 
-## Uploading the Conda packages
+```bash
+$ make container
+```
 
-Once the packages are created they shuld be uploaded
+To create the anaconda packages from the latest git hub
 
-## Management Makefile
+Than you need to log into the image and say
 
-A management makefile will be created with the following targets
+```bash
+container$ anaconda login
+```
 
-`make image` - creates the docker image
-`make image-upload` - uploads the image to dockerhub
-`make conda` -creates all conda packages using the container
-`make conda-upload` uploads all conda packages to the conda hub
+List the available packages in 
 
+    /opt/conda/conda-bld/linux-64/
 
+Then you can identify the version and execute commands similar to
 
+    export VESRION=4.0.21
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-cmd5-$VERSION.tar.bz2
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-$VERSION.tar.bz2
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-$VERSION-py37_0.tar.bz2
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-inventory-$VERSION.tar.bz2
 
-# Creating Conda packages for cloudmesh
+If the versions are different, plase adapt them in the individual commands
 
-BUG install this in non sudo
+After this the pacakes will be visible after a while in 
 
+* <https://anaconda.org/search?q=cloudmesh>
 
-* Step 1 - Download anaconda latest version by running command - 
-  
-  ```
-  mkdir condavm
-  cd condavm
-  vagrant init generic/ubuntu1810
-  vagrant up
-  vagarnt ssh
-  
-  sudo apt-get update
-  # wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh
-
-  # curl -O https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-  #sh Anaconda3-2018.12-Linux-x86_64.sh -b
-  
-  wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-  
-  # sh Anaconda3-5.0.1-Linux-x86_64.sh -b
-  
-  sudo sh Anaconda3-2018.12-Linux-x86_64.sh -b -u -p /usr/local
-  
-  export PATH="/usr/local/anaconda3/bin:$PATH"
-  conda config --set anaconda_upload yes
-  conda config --env --add channels conda-forge
-  
-  export SRC=`pwd`
-  git clone https://github.com/cloudmesh/cloudmesh-common.git
-  git clone https://github.com/cloudmesh/cloudmesh-cmd5.git
-  git clone https://github.com/cloudmesh/cloudmesh-sys.git
-  git clone https://github.com/cloudmesh-community/cloudmesh-inventory.git
-  git clone https://github.com/cloudmesh/cloudmesh-openapi.git
-  git clone https://github.com/cloudmesh-community/cloudmesh-cloud.git
-  ```
- 
-  
-* Step 6 - Login to anaconda org to upload the packages - 
- 
-  ```
-  anaconda login --username <username> --password <Password>
-  ```
- 
-* Step 7 - conda build cloudmesh-common (This will build and upload cloudmesh-common)
-
-  ```
-  cd $SRC/cloudmesh-conda
-  conda build cloudmesh-common
-  conda build cloudmesh-cmd5
-  conda build cloudmesh-sys
-  conda build cloudmesh-inventory
-  ```
-  
-* Step 8 - Install the packages
-
-  ```
-  sudo conda install -y -c laszewski cloudmesh-cmd5
-  sudo conda install -y -c laszewski cloudmesh-sys
-  sudo conda install -y -c laszewski cloudmesh-inventory
-  ```
+If you see in that folder owners that are not `cloudmesh` you should not use
+them. They are not officially released by us.
