@@ -51,7 +51,7 @@ RUN sh -c 'curl -Ls http://cloudmesh.github.io/get | sh'
 RUN python --version
 RUN pip --version
 RUN conda --version
-
+RUN conda config --add channels conda-forge
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
