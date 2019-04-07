@@ -74,3 +74,7 @@ test:
 
 shell:
 	docker run -it cloudmesh/anaconda
+
+
+clean:
+	docker image rm cloudmesh/anaconda --force
