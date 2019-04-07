@@ -37,9 +37,9 @@ RUN apt-get install -y curl grep sed dpkg && \
 
 RUN pip install pip  -U
 
-RUN curl -Ls http://cloudmesh.github.io/get
+RUN conda update --all
+
 RUN sh -c 'curl -Ls http://cloudmesh.github.io/get | sh'
-RUN /bin/sh cloudmesh-install.sh
 
 # RUN cd cloudmesh-common; pip install .; cd ..
 # RUN cd cloudmesh-cmd5; pip install .; cd ..

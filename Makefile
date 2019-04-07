@@ -46,8 +46,8 @@ test:
 	docker run cloudmesh/anaconda conda --version
 	$(DOCKER) ls
 	# $(DOCKER) cms
-	$(DOCKER) pip install python-hostlist
-	$(DOCKER) pip install oyaml
+	#$(DOCKER) pip install python-hostlist
+	#$(DOCKER) pip install oyaml
 	$(DOCKER) conda build cloudmesh-common
 	$(DOCKER) conda build cloudmesh-cmd5
 	$(DOCKER) conda build cloudmesh-sys
