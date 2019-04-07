@@ -38,6 +38,7 @@ RUN apt-get install -y curl grep sed dpkg && \
 RUN pip install pip  -U
 
 RUN conda update --all
+RUN conda config --set always_yes yes
 
 RUN sh -c 'curl -Ls http://cloudmesh.github.io/get | sh'
 
