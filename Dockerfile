@@ -62,8 +62,6 @@ WORKDIR cloudmesh-conda/cloudmesh-inventory
 RUN conda build .
 
 
-# RUN cd cloudmesh-cloud; pip install .; cd ..
-
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
