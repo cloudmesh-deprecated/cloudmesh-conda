@@ -62,11 +62,12 @@ BUG install this in non sudo
   conda config --env --add channels conda-forge
   
   export SRC=`pwd`
-  git clone https://github.com/cloudmesh/cloudmesh.common.git
-  git clone https://github.com/cloudmesh/cloudmesh.cmd5.git
-  git clone https://github.com/cloudmesh/cloudmesh.sys.git
-  git clone https://github.com/cloudmesh/cloudmesh.openapi.git
-  git clone https://github.com/cloudmesh-community/cm.git
+  git clone https://github.com/cloudmesh/cloudmesh-common.git
+  git clone https://github.com/cloudmesh/cloudmesh-cmd5.git
+  git clone https://github.com/cloudmesh/cloudmesh-sys.git
+  git clone https://github.com/cloudmesh-community/cloudmesh-inventory.git
+  git clone https://github.com/cloudmesh/cloudmesh-openapi.git
+  git clone https://github.com/cloudmesh-community/cloudmesh-cloud.git
   ```
  
   
@@ -76,18 +77,20 @@ BUG install this in non sudo
   anaconda login --username <username> --password <Password>
   ```
  
-* Step 7 - conda build cloudmesh.common (This will build and upload cloudmesh.common)
+* Step 7 - conda build cloudmesh-common (This will build and upload cloudmesh-common)
 
   ```
   cd $SRC/cm/conda
-  conda build cloudmesh.common
-  conda build cloudmesh.cmd5
-  conda build cloudmesh.sys
+  conda build cloudmesh-common
+  conda build cloudmesh-cmd5
+  conda build cloudmesh-sys
+  conda build cloudmesh-inventory
   ```
   
 * Step 8 - Install the packages
 
   ```
-  sudo conda install -y -c laszewski cloudmesh.cmd5
-  sudo conda install -y -c laszewski cloudmesh.sys
+  sudo conda install -y -c laszewski cloudmesh-cmd5
+  sudo conda install -y -c laszewski cloudmesh-sys
+  sudo conda install -y -c laszewski cloudmesh-inventory
   ```

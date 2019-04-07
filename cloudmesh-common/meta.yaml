@@ -13,7 +13,6 @@ requirements:
     - python
     - six
     - future
-    - prettytable
     - python-hostlist
     - simplejson
     - oyaml
@@ -24,7 +23,6 @@ requirements:
     - python
     - six
     - future
-    - prettytable
     - python-hostlist
     - simplejson
     - oyaml

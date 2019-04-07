@@ -1,9 +1,9 @@
 package:
-  name: cloudmesh-openapi
+  name: cloudmesh-inventory
   version: 1.0
 
 source:
-  git_url: https://github.com/cloudmesh/cloudmesh-openapi.git
+  git_url: https://github.com/cloudmesh/cloudmesh-cmd5.git
 
 build:
   number: 0
@@ -11,13 +11,19 @@ build:
 requirements:
   build:
     - python
-    - setuptools
-    - pip
+    - pyyaml
+    - docopt
+    - requests
     - cloudmesh-common
     - cloudmesh-cmd5
 
+
   run:
-    - psutil
-    - pygments
+    - pyyaml
+    - docopt
+    - requests
     - cloudmesh-common
     - cloudmesh-cmd5
+
+
+
