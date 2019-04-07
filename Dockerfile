@@ -38,29 +38,21 @@ RUN apt-get install -y curl grep sed dpkg && \
 RUN pip install pip  -U
 
 RUN conda update --all
-RUN conda config --set always_yes yes
-RUN conda config --set anaconda_upload yes
 
 RUN sh -c 'curl -Ls http://cloudmesh.github.io/get | sh'
-
 
 RUN python --version
 RUN pip --version
 RUN conda --version
 RUN conda config --add channels conda-forge
 
-WORKDIR cloudmesh-conda/cloudmesh-common
-RUN conda build .
+RUN conda config --set always_yes yes
+RUN conda config --set anaconda_upload no
 
-WORKDIR cloudmesh-conda/cloudmesh-cmd5
-RUN conda build .
-
-WORKDIR cloudmesh-conda/cloudmesh-sys
-RUN conda build .
-
-WORKDIR cloudmesh-conda/cloudmesh-inventory
-RUN conda build .
-
+RUN cd cloudmesh-conda/cloudmesh-common && conda build .
+RUN cd cloudmesh-conda/cloudmesh-cmd5 && conda build .
+#RUN cd cloudmesh-conda/cloudmesh-sys && conda build .
+# RUN cd cloudmesh-conda/cloudmesh-inventory && conda build .
 
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
@@ -68,22 +60,7 @@ CMD [ "/bin/bash" ]
 
 WORKDIR cloudmesh-conda
 
-#  sudo apt-get update
-#  # wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh
 
-#  # curl -O https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-#  #sh Anaconda3-2018.12-Linux-x86_64.sh -b
 
-#  wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-
-#  # sh Anaconda3-5.0.1-Linux-x86_64.sh -b
-
-#  sudo sh Anaconda3-2018.12-Linux-x86_64.sh -b -u -p /usr/local
-
-#  export PATH="/usr/local/anaconda3/bin:$PATH"
-#  conda config --set anaconda_upload yes
-#  conda config --env --add channels conda-forge
-
-#  export SRC=`pwd`
 
 

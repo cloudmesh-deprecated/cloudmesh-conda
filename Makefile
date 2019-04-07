@@ -71,7 +71,7 @@ test:
 	$(DOCKER) conda build cloudmesh-inventory
 
 shell:
-	docker run --name=conda -it cloudmesh/anaconda
+	docker run --rm --name=conda -it cloudmesh/anaconda
 
 login:
 	docker run --name=conda cloudmesh/anaconda anaconda login
