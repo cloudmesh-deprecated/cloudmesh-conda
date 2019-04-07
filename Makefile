@@ -1,7 +1,7 @@
 PACKAGE=conda
 VERSION=5.2.0
 DOCKER=docker run -v $(CURDIR):$(CURDIR) -w $(CURDIR) cloudmesh/anaconda
-
+OPT=/opt/conda/conda-bld/linux-64
 
 define banner
 	@echo
@@ -74,9 +74,27 @@ shell:
 	docker run --rm --name=conda -it cloudmesh/anaconda
 
 login:
-	docker run --name=conda cloudmesh/anaconda anaconda login
+	docker run --name=conda cloudmesh/anaconda anaconda login --username $(USERNAME) --password $(PASSWORD)
 
+upload:
+	@$(DOCKER) ls /opt/conda/conda-bld/linux-64 > /tmp/files-tmp.txt
+	@fgrep tar /tmp/files-tmp.txt > /tmp/files.txt
+	@while read -r file; do \
+	$(DOCKER) anaconda upload  $(OPT)/$$file ; \
+	done < /tmp/files.txt
 
+upload-cloudmesh-broken:
+	@$(DOCKER) ls /opt/conda/conda-bld/linux-64 > /tmp/files-tmp.txt
+	@fgrep tar /tmp/files-tmp.txt > /tmp/files.txt
+	@while read -r file; do \
+	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/$$file ; \
+	done < /tmp/files.txt
+
+upload-sample-broken:
+	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-cmd5-4.0.21-0.tar.bz2
+	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-common-4.0.21-py37_0.tar.bz2
+	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-inventory-4.0.21-0.tar.bz2
+	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-sys-4.0.21-0.tar.bz2
 
 clean:
 	docker image rm cloudmesh/anaconda --force

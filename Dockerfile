@@ -54,6 +54,7 @@ RUN cd cloudmesh-conda/cloudmesh-cmd5 && conda build .
 RUN cd cloudmesh-conda/cloudmesh-sys && conda build .
 RUN cd cloudmesh-conda/cloudmesh-inventory && conda build .
 
+RUN ls /opt/conda/conda-bld/linux-64/
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
