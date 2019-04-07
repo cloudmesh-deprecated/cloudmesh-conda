@@ -23,8 +23,6 @@ requirements:
     - python
     - six
     - future
-    - python-hostlist
     - simplejson
-    - oyaml
     - colorama
     - psutil

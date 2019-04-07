@@ -80,7 +80,7 @@ BUG install this in non sudo
 * Step 7 - conda build cloudmesh-common (This will build and upload cloudmesh-common)
 
   ```
-  cd $SRC/cm/conda
+  cd $SRC/cloudmesh-conda
   conda build cloudmesh-common
   conda build cloudmesh-cmd5
   conda build cloudmesh-sys
