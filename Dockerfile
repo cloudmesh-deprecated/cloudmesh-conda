@@ -37,20 +37,15 @@ RUN apt-get install -y curl grep sed dpkg && \
 
 RUN pip install pip  -U
 
-RUN \
-  git clone https://github.com/cloudmesh/cloudmesh-common.git && \
-  git clone https://github.com/cloudmesh/cloudmesh-cmd5.git && \
-  git clone https://github.com/cloudmesh/cloudmesh-sys.git && \
-  git clone https://github.com/cloudmesh/cloudmesh-inventory.git && \
-  git clone https://github.com/cloudmesh/cloudmesh-openapi.git && \
-  git clone https://github.com/cloudmesh/cloudmesh-cloud.git && \
-  git clone https://github.com/cloudmesh/cloudmesh-conda.git
+RUN curl -Ls http://cloudmesh.github.io/get
+RUN sh -c 'curl -Ls http://cloudmesh.github.io/get | sh'
+RUN /bin/sh cloudmesh-install.sh
 
-RUN cd cloudmesh-common; pip install .; cd ..
-RUN cd cloudmesh-cmd5; pip install .; cd ..
-RUN cd cloudmesh-sys; pip install .; cd ..
-RUN cd cloudmesh-inventory; pip install .; cd ..
-RUN cd cloudmesh-cloud; pip install .; cd ..
+# RUN cd cloudmesh-common; pip install .; cd ..
+# RUN cd cloudmesh-cmd5; pip install .; cd ..
+# RUN cd cloudmesh-sys; pip install .; cd ..
+# RUN cd cloudmesh-inventory; pip install .; cd ..
+# RUN cd cloudmesh-cloud; pip install .; cd ..
 # RUN cd cloudmesh-; pip install .; cd ..
 
 RUN python --version
