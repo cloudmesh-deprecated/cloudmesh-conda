@@ -80,23 +80,28 @@ upload:
 	@$(DOCKER) ls /opt/conda/conda-bld/linux-64 > /tmp/files-tmp.txt
 	@fgrep tar /tmp/files-tmp.txt > /tmp/files.txt
 	@while read -r file; do \
-	$(DOCKER) anaconda upload  $(OPT)/$$file ; \
+	$(DOCKER) anaconda upload --user=cloudmesh $(OPT)/$$file ; \
 	done < /tmp/files.txt
 
-upload-cloudmesh-broken:
-	@$(DOCKER) ls /opt/conda/conda-bld/linux-64 > /tmp/files-tmp.txt
-	@fgrep tar /tmp/files-tmp.txt > /tmp/files.txt
-	@while read -r file; do \
-	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/$$file ; \
-	done < /tmp/files.txt
+#
+#  EXPERIMENTAL FROM HERE ON
+#
+
 
 upload-sample-broken:
-	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-cmd5-4.0.21-0.tar.bz2
-	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-common-4.0.21-py37_0.tar.bz2
-	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-inventory-4.0.21-0.tar.bz2
-	$(DOCKER) anaconda upload --user cloudmesh $(OPT)/cloudmesh-sys-4.0.21-0.tar.bz2
+	$(DOCKER) anaconda upload --user=cloudmesh $(OPT)/cloudmesh-cmd5-4.0.21-0.tar.bz2
+	$(DOCKER) anaconda upload --user=cloudmesh $(OPT)/cloudmesh-common-4.0.21-py37_0.tar.bz2
+	$(DOCKER) anaconda upload --user=cloudmesh $(OPT)/cloudmesh-inventory-4.0.21-0.tar.bz2
+	$(DOCKER) anaconda upload --user=cloudmesh $(OPT)/cloudmesh-sys-4.0.21-0.tar.bz2
+
+notes:
+	anaconda login
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-cmd5-4.0.21-0.tar.bz2
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-4.0.21-0.tar.bz2
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-4.0.21-py37_0.tar.bz2
+    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-inventory-4.0.21-0.tar.bz2
 
 clean:
 	docker image rm cloudmesh/anaconda --force
 	docker system prune -f
-	
+
