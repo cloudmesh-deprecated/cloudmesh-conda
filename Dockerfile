@@ -39,7 +39,6 @@ RUN pip install pip  -U
 
 RUN conda update --all
 
-RUN sh -c 'curl -Ls http://cloudmesh.github.io/get | sh'
 
 RUN python --version
 RUN pip --version
@@ -48,6 +47,12 @@ RUN conda config --add channels conda-forge
 
 RUN conda config --set always_yes yes
 RUN conda config --set anaconda_upload no
+
+RUN pip install cloudmesh-installer
+
+WORKDIR cloudmesh-conda
+
+RUN cloudmesh-installer git clone cms
 
 RUN cd cloudmesh-conda/cloudmesh-common && conda build .
 RUN cd cloudmesh-conda/cloudmesh-cmd5 && conda build .
