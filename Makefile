@@ -10,6 +10,9 @@ define banner
 	@echo "############################################################"
 endef
 
+update:
+	anaconda login
+	./update.sh
 
 conda-build:
 	conda-build $(PACKAGE)
