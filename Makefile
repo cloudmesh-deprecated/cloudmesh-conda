@@ -99,10 +99,10 @@ upload-sample-broken:
 
 notes:
 	anaconda login
-    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-cmd5-4.0.21-0.tar.bz2
-    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-4.0.21-0.tar.bz2
-    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-4.0.21-py37_0.tar.bz2
-    anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-inventory-4.0.21-0.tar.bz2
+	anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-cmd5-4.0.21-0.tar.bz2
+	anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-4.0.21-0.tar.bz2
+	anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-common-4.0.21-py37_0.tar.bz2
+	anaconda upload --user=cloudmesh /opt/conda/conda-bld/linux-64/cloudmesh-inventory-4.0.21-0.tar.bz2
 
 clean:
 	docker image rm cloudmesh/anaconda --force
