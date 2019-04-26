@@ -3,6 +3,16 @@
 We explain how we create conda packages for cloudmesh. This has not yet been
 extensively tested, but we encourage you to try it
 
+workflow:
+
+make container
+make shell
+container> anaconda login
+container> make upload
+
+open https://anaconda.org/cloudmesh/repo
+
+
 ## Installing of the packages
 
 You will need to execute the following commands

@@ -11,7 +11,6 @@ define banner
 endef
 
 update:
-	anaconda login
 	./update.sh
 
 conda-build:

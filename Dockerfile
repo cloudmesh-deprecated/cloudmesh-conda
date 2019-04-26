@@ -35,6 +35,8 @@ RUN apt-get install -y curl grep sed dpkg && \
     rm tini.deb && \
     apt-get clean
 
+RUN apt-get install -y build-essential
+
 RUN pip install pip  -U
 
 RUN conda update --all
@@ -46,7 +48,7 @@ RUN conda --version
 RUN conda config --add channels conda-forge
 
 RUN conda config --set always_yes yes
-RUN conda config --set anaconda_upload no
+RUN conda config --set anaconda_upload yes
 
 RUN pip install cloudmesh-installer
 
