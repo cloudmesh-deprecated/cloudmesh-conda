@@ -50,14 +50,19 @@ RUN conda config --set anaconda_upload no
 
 RUN pip install cloudmesh-installer
 
-WORKDIR cloudmesh-conda
 
 RUN cloudmesh-installer git clone cms
+RUN cloudmesh-installer git clone conda
 
-RUN cd cloudmesh-conda/cloudmesh-common && conda build .
-RUN cd cloudmesh-conda/cloudmesh-cmd5 && conda build .
-RUN cd cloudmesh-conda/cloudmesh-sys && conda build .
-RUN cd cloudmesh-conda/cloudmesh-inventory && conda build .
+
+
+RUN cd cloudmesh-conda && conda build cloudmesh-common
+RUN cd cloudmesh-conda && conda build cloudmesh-cmd5
+RUN cd cloudmesh-conda && conda build cloudmesh-sys
+
+
+#WORKDIR /cloudmesh-conda
+#RUN  conda build .
 
 RUN ls /opt/conda/conda-bld/linux-64/
 
