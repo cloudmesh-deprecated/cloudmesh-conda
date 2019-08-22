@@ -24,7 +24,7 @@ $ conda install -c cloudmesh cloudmesh-sys
 $ conda install -c cloudmesh cloudmesh-inventory
 ```
 
-After this you still need to set up the `cloudmesh.yaml`, `cloudmesh4.yaml`, and
+After this you still need to set up the `cloudmesh.yaml` and
 inventory.yaml in your ~/.cloudmesh directory. Prerequisits
 
 For more indformation see our documentation
