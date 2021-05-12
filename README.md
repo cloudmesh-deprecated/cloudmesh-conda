@@ -1,7 +1,7 @@
 # Conda Cloudmesh Package creation
 
 We explain how we create conda packages for cloudmesh. This has not yet been
-extensively tested, but we encourage you to try it
+extensively tested. If you like to help let us know.
 
 workflow:
 

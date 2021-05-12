@@ -1,5 +1,5 @@
 #FROM debian:latest
-FROM ubuntu:18.10
+FROM ubuntu:20.04
 
 MAINTAINER Gregor von Laszewski <laszewski@gmail.com>
 
@@ -17,9 +17,17 @@ RUN apt-get update
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
-RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1 \
-    git mercurial subversion
+RUN apt-get update --fix-missing
+RUN apt-get install -y wget bzip2
+RUN apt-get install -y ca-certificates 
+RUN apt-get install -y libglib2.0-0
+RUN apt-get install -y libxext6
+RUN apt-get install -y libsm6
+RUN apt-get install -y libxrender1 
+RUN apt-get install -y git
+RUN apt-get install -y mercurial
+RUN apt-get install -y subversion
+RUN apt-get install -y curl grep sed
 
 RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-$VERSION-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
@@ -28,12 +36,7 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-$VERSION-Linux-x86_
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 
-RUN apt-get install -y curl grep sed dpkg && \
-    TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
-    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
-    dpkg -i tini.deb && \
-    rm tini.deb && \
-    apt-get clean
+RUN apt-get clean
 
 RUN apt-get install -y build-essential
 
@@ -50,30 +53,30 @@ RUN conda config --add channels conda-forge
 RUN conda config --set always_yes yes
 RUN conda config --set anaconda_upload yes
 
-RUN pip install cloudmesh-installer
+# RUN pip install cloudmesh-installer
+# RUN cloudmesh-installer git clone cms
+# RUN cloudmesh-installer git clone conda
 
 
-RUN cloudmesh-installer git clone cms
-RUN cloudmesh-installer git clone conda
+RUN git clone https://github.com/cloudmesh/cloudmesh-conda.git
 
-
-
-RUN cd cloudmesh-conda && conda build cloudmesh-common
-RUN cd cloudmesh-conda && conda build cloudmesh-cmd5
-RUN cd cloudmesh-conda && conda build cloudmesh-sys
+# RUN cd cloudmesh-conda && conda build cloudmesh-common
+# RUN cd cloudmesh-conda && conda build cloudmesh-cmd5
+# RUN cd cloudmesh-conda && conda build cloudmesh-sys
 
 
 #WORKDIR /cloudmesh-conda
 #RUN  conda build .
 
-RUN ls /opt/conda/conda-bld/linux-64/
+# RUN ls /opt/conda/conda-bld/linux-64/
 
-ENTRYPOINT [ "/usr/bin/tini", "--" ]
-CMD [ "/bin/bash" ]
+
 
 WORKDIR cloudmesh-conda
 
+RUN make skeleton
 
+CMD [ "/bin/bash" ]
 
 
 

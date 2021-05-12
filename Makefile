@@ -10,6 +10,15 @@ define banner
 	@echo "############################################################"
 endef
 
+skeleton:
+	for package in common cmd5 inventory sys ; do \
+		rm -rf cloudmesh-$$package ; \
+		conda skeleton pypi cloudmesh-$$package ; \
+		cat cloudmesh-$$package/meta.yaml | sed "s/your-github-id-here/laszewsk/g" > cloudmesh-$$package/meta-new.yaml ;\
+		mv cloudmesh-$$package/meta-new.yaml cloudmesh-$$package/meta.yaml ; \
+	done
+
+
 update:
 	./update.sh
 
